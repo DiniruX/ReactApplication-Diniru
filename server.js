@@ -61,6 +61,24 @@ app.post("/register", (req, res)=> {
     
 }) 
 
+app.put('/user/update/:id',(req,res)=>{
+
+    User.findByIdAndUpdate(
+        req.params.id,
+        {
+            $set:req.body
+        },
+        (err,user)=>{
+            if(err){
+                return res.status(400).json({error:err});
+            }
+
+             return res.status(200).json({
+                success:"Updated SuccessFull!"
+            });
+        });
+});
+
 app.listen(8000,() => {
     console.log("BE started at port 8000")
 })
